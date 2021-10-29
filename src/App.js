@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import React from "react"
+import Form from "./components/form"
 
 class App extends React.Component {
   constructor(){
@@ -14,33 +16,57 @@ class App extends React.Component {
       passwordIsValid: false,
       isSubmitted: false
     }
+
+  }
+  handleEmailChange =(event)=>{
+    const test = event.target.value
+    let regex = /[\w\.]+@([\w-]+\.)+[\w-]{2,4}$/
+    console.log(regex.test(test))
+    this.setState({email: event.target.value, emailIsValid:regex.test(test)})
+
+    //  this.setState({emailIsValid: regex.test(test)})
+  }
+
+  handlePasswordChange = (event) =>{
+    this.setState({password: event.target.value, passwordIsValid: event.target.value.length > 5})
+    // {!this.state.emailIsValid && classChange ==="is-invalid"}
+
+    
+  }
+
+  handleRememberMeChange = (event) => {
+
+    this.setState({rememberMe: true})
+
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    this.setState({isSubmitted : this.state.passwordIsValid && this.state.emailIsValid})
   }
 
 
 render (){
+  console.log(this.state.emailIsValid)
+  console.log(this.state.passwordIsValid)
+  console.log(this.state.isSubmitted)
+
+// let classChange = ""
   return (
  <div>
     <h1>Login</h1>
-    <Form>
-  <Form.Group className="mb-3" controlId="formBasicEmail">
-    <Form.Label>Email address</Form.Label>
-    <Form.Control type="email" placeholder="Enter email" />
-    {/* <Form.Text className="text-muted">
-      We'll never share your email with anyone else.
-    </Form.Text> */}
-  </Form.Group>
 
-  <Form.Group className="mb-3" controlId="formBasicPassword">
-    <Form.Label>Password</Form.Label>
-    <Form.Control type="password" placeholder="Password" />
-  </Form.Group>
-  <Form.Group className="mb-3" controlId="formBasicCheckbox">
-    <Form.Check type="checkbox" label="Check me out" />
-  </Form.Group>
-  <Button variant="primary" type="submit">
-    Submit
-  </Button>
-</Form>
+    {this.state.isSubmitted ?(
+          <p>{this.state.email}</p>
+        ) : (
+    <Form onChangeEmail={this.handleEmailChange} 
+      onChangePassword={this.handlePasswordChange}
+      onChangeRememberMe={this.handleRememberMeChange} 
+      onSubmit={this.handleSubmit}>
+      {/* classChange = {this.classChange} */}
+
+     </Form>
+    )}
  </div>
   );
   }
