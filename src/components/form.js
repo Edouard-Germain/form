@@ -17,7 +17,7 @@
                         </div>
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1" onChange={this.props.onChangeRememberMe}></input>
-                        <label class="form-check-label" for="exampleCheck1">remember me </label>
+                        <label class="form- check-label" for="exampleCheck1">remember me </label>
                     </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

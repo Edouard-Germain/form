@@ -22,13 +22,19 @@ class App extends React.Component {
     const test = event.target.value
     let regex = /[\w\.]+@([\w-]+\.)+[\w-]{2,4}$/
     console.log(regex.test(test))
-    this.setState({email: event.target.value, emailIsValid:regex.test(test)})
+    this.setState({
+      email: event.target.value,
+      emailIsValid:regex.test(test)
+    })
 
     //  this.setState({emailIsValid: regex.test(test)})
   }
 
   handlePasswordChange = (event) =>{
-    this.setState({password: event.target.value, passwordIsValid: event.target.value.length > 5})
+    this.setState({
+      password: event.target.value,
+      passwordIsValid: event.target.value.length > 5
+      })
     // {!this.state.emailIsValid && classChange ==="is-invalid"}
 
     
@@ -42,7 +48,9 @@ class App extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.setState({isSubmitted : this.state.passwordIsValid && this.state.emailIsValid})
+    this.setState({
+      isSubmitted : this.state.passwordIsValid && this.state.emailIsValid
+    })
   }
 
 
